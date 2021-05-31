@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Index</title>
+  </head>
+  <body>
+
+    <input type="number" name="numberOfCategories" id="numberOfCategories" value="">
+    <div id="container"></div>
+    <script>
+      
+      function requestCategories(numberOfCategories) {
+        return fetch(`http://jservice.io/api/categories?count=${numberOfCategories}`)
+      }
+
+      function requestClues(categoryId) {
+        return fetch(`http://jservice.io/api/clues?count=${categoryId}`)
+      }
+
+      function addCategoriesToDocument(category) {
+        console.log(category)
+        let h1 = document.createElement('h1')
+        h1.innerText = category.title
+        document.querySelector('#container').appendChild(h1)
+        for(let i = 1; i <= category.clues_count; i++) {
+          let p = document.createElement('p')
+          p.innerHTML = `Count ${i}`
+          document.querySelector('#container').appendChild(p)
+        }
+      }
+
+      document.querySelector('#numberOfCategories').addEventListener(
+        'change',
+        (evt) => {
+          //console.log(evt.currentTarget)
+          requestCategories(evt.currentTarget.value).then(response => {
+            //console.log(response)
+            return response.json()
+          }).then(response => {
+            document.querySelector('#container').innerHTML = ''
+            let categoryList = []
+            for(let category of response) {
+              addCategoriesToDocument(category)
+              categoryList.push(requestClues(category.id))
+            }
+            return Promise.all(categoryList)
+          }).then(categoryClues => {
+            //console.log(categoryClues)
+          }).catch(error => { console.log(error)})
+        })
+    </script>
+  </body>
+</html>

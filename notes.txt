@@ -1,0 +1,29 @@
+https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=ocean
+
+    - returns all photos and the object ID's
+
+https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]
+
+    - returns a specific object (aka artwork's) information 
+    - takes the object ID from the first fetch to do so
+
+WHAT ARE THE IMPORTANT QUERY/KEYS?
+isHighlight	is the boolean for the checkmart shit
+primaryImage is a string for the url that has the jpg
+department is a string for the department name it's from 
+title is a string for the name of the artwork
+artistDisplayName is a string for the artist's name
+artistDisplayBio is a string for the artist' bio 
+medium is the string for the material of the artwork
+
+
+https://collectionapi.metmuseum.org/public/collection/v1/departments
+    - returns the department ID and its respective department name
+
+
+https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=1
+    - returns the object ID's of the artworks belonging to that specific department
+    - checks a specific department based on the department ID number placed in the link
+
+
+`https://collectionapi.metmuseum.org/public/collection/v1/objects/${artworkID}`
