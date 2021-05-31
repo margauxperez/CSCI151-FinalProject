@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <style>
       body{
         font-family: 'Karla', sans-serif;
@@ -47,24 +49,27 @@
         background: #B30C3C;
         color: white;
         font-family: 'Karla', sans-serif;
-      }      
-
-      .modalControl{
-        display: none;
-      }
-
-    .modalControl:checked + label > img {
-        width: 70px;
-        height: 74px;
-    }
+      }     
+     
     </style>
   </head>
   <body>
 
     <h1>The MET Museum</h1>
+
+    <!-- <input type="checkbox" id="accept" class="cbox"> Highlight
+    <input type="button" id="btn" value="Submit"> -->
+
     <div class="gallery"></div>
 
     <!-- THIS ONE IS WORKING -->
+
+    <!-- MODAL PLUG-IN sourced from https://www.w3schools.com/w3css/4/w3.css-->
+    <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+      <div class="w3-modal-content w3-animate-zoom">
+        <img id="img01" style="width: 100%">
+      </div>
+    </div>
 
     <script>
 
@@ -79,10 +84,6 @@
 
       //console.log(data)
       //console.log(data.objectIDs)
-
-      let individualObjectRequests = []
-      let imageArray = []
-      //const artwork = document.createElement("div")
 
       data.objectIDs.forEach(objID =>{
 
@@ -100,37 +101,26 @@
 
           const artwork = document.createElement("div")
           artwork.innerHTML = `<div class="painting">
-            <img id="myImg" src="${art.primaryImage}">
+            <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
             <p>${art.title}</p>
             <p>${art.medium}</p>
             <p>${art.artistDisplayName}</p>
             <p>${art.artistDisplayBio}</p>
             </div>`;
           document.querySelector('.gallery').appendChild(artwork)
-            
+          
         })
-
-        //console.log(individualObjectRequests)
-        //return Promise.all(individualObjectRequests)
 
       })
       
-      // return Promise.all(individualObjectRequests)
-      // .then((values) =>{
-      //   console.log(values)
-      // })
-
-      // console.log(individualObjectRequests)
-      // return Promise.all(individualObjectRequests)
-
     })
-  
-  
-    // var img = document.getElementById('myImg')
 
-    // img.onclick = function(){
-    //   console.log("image was clicked")
-    // }
+
+    //MODAL PLUG-IN
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+    }
 
     </script>
   </body>

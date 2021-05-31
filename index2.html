@@ -66,58 +66,29 @@
 
     <script>
 
-    fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?&q=sunflower")
-    .then((response) => {
-        if(!response.ok){
-          throw new Error(response.statusText)
-        }
-        return response.json()
-      })
-    .then((data) => {
+    // fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?&q=sunflower")
+    // .then((response) => {
+    //     if(!response.ok){
+    //       throw new Error(response.statusText)
+    //     }
+    //     return response.json()
+    //   })
+    // .then((data) => {
+    //   //console.log(data)
+    //   //console.log(data.objectIDs)
+    //   let individualObjectRequests = []
+    //   //const artwork = document.createElement("div")
 
-      //console.log(data)
-      //console.log(data.objectIDs)
+    //   data.objectIDs.forEach(objID =>{
+    //     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objID}`)
+    //     .then((res) =>{return res.json()})
+    //     .then((art) =>{})
+    //   })
+    //    return Promise.all(individualObjectRequests)
+    //    console.log(individualObjectRequests)
+    // })
 
-      let individualObjectRequests = []
-      let imageArray = []
-      //const artwork = document.createElement("div")
-
-      data.objectIDs.forEach(objID =>{
-
-        //individualObjectRequests += 
-        //console.log(objID)
-        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objID}`)
-        .then((res) =>{
-          //console.log(res)
-          return res.json()
-          //individualObjectRequests.push(res)
-        })
-        .then((art) =>{
-            individualObjectRequests.push(art)
-        })
-
-        //console.log(individualObjectRequests)
-        //return Promise.all(individualObjectRequests)
-
-      })
-      
-      // return Promise.all(individualObjectRequests)
-      // .then((values) =>{
-      //   console.log(values)
-      // })
-
-
-       return Promise.all(individualObjectRequests)
-       console.log(individualObjectRequests)
-
-    })
   
-   
-    // var img = document.getElementById('myImg')
-
-    // img.onclick = function(){
-    //   console.log("image was clicked")
-    // }
 
     </script>
   </body>
