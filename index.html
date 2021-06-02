@@ -6,13 +6,13 @@
     <title>Perez - Final Project</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lato:ital@0;1&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <style>
       body{
-        font-family: 'Karla', sans-serif;
+        font-family: 'DM Serif Display', serif;
       }
 
       .gallery{
@@ -27,9 +27,15 @@
         padding: 0 4px;
       }
 
+      .painting h2{
+        max-width: fit-content;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+      }
+
       .painting p{
         max-width: fit-content;
-        font-family: 'Karla', sans-serif;
+        font-family: 'Lato', sans-serif;
       }
 
       .painting img{
@@ -43,26 +49,24 @@
       }
       
       h1{
-        padding: 50px;
-        margin: 30px;
+        padding: 30px;
         text-align: center;
-        background: #B30C3C;
+        background: #E41C2C;
         color: white;
-        font-family: 'Karla', sans-serif;
+        font-size: 60px;
+        font-family: 'DM Serif Display', serif;
       }     
      
     </style>
   </head>
   <body>
 
-    <h1>The MET Museum</h1>
+    <h1>THE MET</h1>
 
     <!-- <input type="checkbox" id="accept" class="cbox"> Highlight
     <input type="button" id="btn" value="Submit"> -->
 
     <div class="gallery"></div>
-
-    <!-- THIS ONE IS WORKING -->
 
     <!-- MODAL PLUG-IN sourced from https://www.w3schools.com/w3css/4/w3.css-->
     <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
@@ -102,7 +106,7 @@
           const artwork = document.createElement("div")
           artwork.innerHTML = `<div class="painting">
             <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
-            <p>${art.title}</p>
+            <h2>${art.title}</h2>
             <p>${art.medium}</p>
             <p>${art.artistDisplayName}</p>
             <p>${art.artistDisplayBio}</p>
@@ -114,7 +118,6 @@
       })
       
     })
-
 
     //MODAL PLUG-IN
     function onClick(element) {
