@@ -65,7 +65,8 @@
       }     
 
       .checkbox-style{
-        position:relative;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
         margin-left: 10px;
       }
      
@@ -91,7 +92,6 @@
     <script>
 
     fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?&q=sunflower")
-    //fetch(" https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir")
     .then((response) => {
         if(!response.ok){
           throw new Error(response.statusText)
@@ -141,8 +141,6 @@
 
             if(checkbox.checked){
               console.log("checked");
-              //console.log(painting);
-              //console.log(artwork);
 
               if(`${art.isHighlight}` == "false"){
                 console.log(art.objectID)
