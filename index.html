@@ -16,9 +16,30 @@
 
       }
 
+      .main-container{
+        display: flex; 
+        /* margin: auto -1rem 1rem; */
+      }
+
+      .sidebar{
+        flex: 1;
+        margin-left: 20px;
+        background: #E41C2C;
+        color: white;
+
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+
+      }
+
+      /* .aWing{
+        margin-left: 20px;
+      } */
+      
       .gallery{
         display: flex;
         flex-wrap: wrap;
+        flex: 6;
         padding: 0 4px;
         justify-content: space-around;
 
@@ -78,11 +99,21 @@
 
     <div class="checkbox-style">
       <input type="checkbox" id="checkbox" class="checkbox" name=checkbox> Highlight
-      <input type="checkbox" id="aWing" class="aWing" name=aWing> The American Wing
     </div>
 
-    <div class="gallery"></div>
+    <div class="main-container">
+      <div class="sidebar">
+        <input type="checkbox" id="aWing" class="aWing" name="aWing"> The American Wing<br>
+        <input type="checkbox" id="dandp" class="dandp" name="dandp"> Drawings and Prints<br>
+        <input type="checkbox" id="eursculp" class="eursculp" name="eursculp"> European Sculpture and Decorative Arts<br>
+        <input type="checkbox" id="eurp" class="eurp" name="eurp"> European Paintings<br>
+        <input type="checkbox" id="asianA" class="asianA" name="asianA"> Asian Art
+      </div>
+  
+      <div class="gallery"></div>  
+    </div>
 
+    
     <!-- MODAL PLUG-IN sourced from https://www.w3schools.com/w3css/4/w3.css-->
     <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
       <div class="w3-modal-content w3-animate-zoom">
@@ -142,9 +173,10 @@
           var checkboxaWing = document.querySelector("input[name=aWing]")
           checkboxaWing.addEventListener('click', aWing)
 
+          var checkboxDandP = document.querySelector("input[name=dandp]")
+          checkboxDandP.addEventListener('click', DandP)
+
           function highlight(){
-            const gallery = document.getElementById('gallery')
-            const painting = document.querySelectorAll('painting')
 
             if(checkbox.checked){
               //console.log("checked");
@@ -172,16 +204,54 @@
           }
 
           function aWing(){
-            const gallery = document.getElementById('gallery')
-            const painting = document.querySelectorAll('painting')
 
             if(checkboxaWing.checked){
-              console.log("checked");
 
               if(`${art.department}` != "The American Wing"){
-                //console.log(art.objectID)
-                //console.log(art.isHighlight)
-                console.log("check bool and remove content")
+                console.log("remove content");
+                console.log(art.objectID)
+                console.log(art.department)
+                //console.log("check bool and remove content")
+                artwork.innerHTML = ""
+
+              }
+
+              else {
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                <p>${art.department}</p>
+
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+          
+              }
+
+            } else {
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+          
+              }
+          }
+
+          function DandP(){
+
+            if(checkboxDandP.checked){
+              console.log("checked");
+
+              if(`${art.department}` != "Drawings and Prints"){
+                console.log(art.objectID)
+                console.log(art.department)
+                //console.log("check bool and remove content")
                 artwork.innerHTML = ""
 
               }
@@ -197,8 +267,6 @@
               document.querySelector('.gallery').appendChild(artwork)
           
               }
-
-
           }
 
         })
