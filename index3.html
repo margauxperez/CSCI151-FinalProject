@@ -67,7 +67,6 @@
       .checkbox-style{
         font-family: 'Lato', sans-serif;
         font-size: 20px;
-        margin-left: 20px;
       }
      
     </style>
@@ -78,7 +77,6 @@
 
     <div class="checkbox-style">
       <input type="checkbox" id="checkbox" class="checkbox" name=checkbox> Highlight
-      <input type="checkbox" id="aWing" class="aWing" name=aWing> The American Wing
     </div>
 
     <div class="gallery"></div>
@@ -92,7 +90,7 @@
 
     <script>
 
-    fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=sunflower")
+    fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?&q=sunflower")
     .then((response) => {
         if(!response.ok){
           throw new Error(response.statusText)
@@ -114,15 +112,11 @@
           return res.json()
         })
         .then((art) =>{
-          //console.log(art)
+          console.log(art)
           //console.log(art.primaryImage)
           //console.log(art.department)
-          //console.log(art.objectID)
-          //console.log(art.isHighlight)
-          //console.log(art.title)
-          //console.log("department")
-          console.log(art.department)
 
+          //if(objID.length <=10){
 
             const artwork = document.createElement("div")
             artwork.innerHTML = `<div class="painting">
@@ -134,24 +128,22 @@
             </div>`;
           document.querySelector('.gallery').appendChild(artwork)
 
+          //}
           
 
-          var checkbox = document.querySelector("input[name=checkbox]")
-          checkbox.addEventListener('click', highlight)
-
-          var checkboxaWing = document.querySelector("input[name=aWing]")
-          checkboxaWing.addEventListener('click', aWing)
+          var checkbox = document.querySelector("input[name=checkbox]");
+          checkbox.addEventListener('click', highlight);
 
           function highlight(){
-            const gallery = document.getElementById('gallery')
-            const painting = document.querySelectorAll('painting')
+            const gallery = document.getElementById('gallery');
+            const painting = document.querySelectorAll('painting');
 
             if(checkbox.checked){
-              //console.log("checked");
+              console.log("checked");
 
               if(`${art.isHighlight}` == "false"){
-                //console.log(art.objectID)
-                //console.log(art.isHighlight)
+                // console.log(art.objectID)
+                // console.log(art.isHighlight)
                 // console.log("check bool and remove content")
                 artwork.innerHTML = ""
 
@@ -171,36 +163,6 @@
 
           }
 
-          function aWing(){
-            const gallery = document.getElementById('gallery')
-            const painting = document.querySelectorAll('painting')
-
-            if(checkboxaWing.checked){
-              console.log("checked");
-
-              if(`${art.department}` != "The American Wing"){
-                //console.log(art.objectID)
-                //console.log(art.isHighlight)
-                console.log("check bool and remove content")
-                artwork.innerHTML = ""
-
-              }
-
-            } else{
-                artwork.innerHTML = `<div class="painting">
-                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
-                <h2>${art.title}</h2>
-                <p>${art.medium}</p>
-                <p>${art.artistDisplayName}</p>
-                <p>${art.artistDisplayBio}</p>
-                </div>`;
-              document.querySelector('.gallery').appendChild(artwork)
-          
-              }
-
-
-          }
-
         })
 
       })
@@ -209,8 +171,8 @@
 
     //MODAL PLUG-IN
     function onClick(element) {
-      document.getElementById("img01").src = element.src
-      document.getElementById("modal01").style.display = "block"
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
     }
 
     </script>
