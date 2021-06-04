@@ -132,28 +132,19 @@
       })
     .then((data) => {
 
-      //console.log(data)
-      //console.log(data.objectIDs)
-
       data.objectIDs.forEach(objID =>{
 
-        //individualObjectRequests += 
-        //console.log(objID)
         fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objID}`)
         .then((res) =>{
-          //console.log(res)
           return res.json()
         })
         .then((art) =>{
-          //console.log(art)
           //console.log(art.primaryImage)
           //console.log(art.department)
           //console.log(art.objectID)
           //console.log(art.isHighlight)
           //console.log(art.title)
-          //console.log("department")
-          console.log(art.department)
-
+          //console.log(art.department)
 
             const artwork = document.createElement("div")
             artwork.innerHTML = `<div class="painting">
@@ -165,7 +156,6 @@
             </div>`;
           document.querySelector('.gallery').appendChild(artwork)
 
-          
 
           var checkbox = document.querySelector("input[name=checkbox]")
           checkbox.addEventListener('click', highlight)
@@ -175,6 +165,16 @@
 
           var checkboxDandP = document.querySelector("input[name=dandp]")
           checkboxDandP.addEventListener('click', DandP)
+
+          var checkboxES = document.querySelector("input[name=eursculp]")
+          checkboxES.addEventListener('click', EurSculp)
+
+          var checkboxEP = document.querySelector("input[name=eurp]")
+          checkboxEP.addEventListener('click', EurP)
+
+          var checkboxAA = document.querySelector("input[name=asianA]")
+          checkboxAA.addEventListener('click', AsianArt)
+          
 
           function highlight(){
 
@@ -203,15 +203,15 @@
 
           }
 
-          function aWing(){
+           function aWing(){
 
             if(checkboxaWing.checked){
 
               if(`${art.department}` != "The American Wing"){
-                console.log("remove content");
-                console.log(art.objectID)
-                console.log(art.department)
-                //console.log("check bool and remove content")
+                // console.log("remove content");
+                // console.log(art.objectID)
+                // console.log(art.department)
+                // console.log("check bool and remove content")
                 artwork.innerHTML = ""
 
               }
@@ -246,17 +246,26 @@
           function DandP(){
 
             if(checkboxDandP.checked){
-              console.log("checked");
 
               if(`${art.department}` != "Drawings and Prints"){
-                console.log(art.objectID)
-                console.log(art.department)
-                //console.log("check bool and remove content")
                 artwork.innerHTML = ""
 
               }
 
-            } else{
+              else {
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                <p>${art.department}</p>
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+
+              }
+
+            } else {
                 artwork.innerHTML = `<div class="painting">
                 <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
                 <h2>${art.title}</h2>
@@ -265,9 +274,120 @@
                 <p>${art.artistDisplayBio}</p>
                 </div>`;
               document.querySelector('.gallery').appendChild(artwork)
-          
+
               }
+
           }
+
+          function EurSculp(){
+
+            if(checkboxES.checked){
+
+              if(`${art.department}` != "European Sculpture and Decorative Arts"){
+                artwork.innerHTML = ""
+              }
+
+              else {
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                <p>${art.department}</p>
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+
+              }
+
+            } else {
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+
+              }
+
+            }
+
+            function EurP(){
+
+              if(checkboxEP.checked){
+
+                if(`${art.department}` != "European Paintings"){
+     
+                  artwork.innerHTML = ""
+
+                }
+
+                else {
+                  artwork.innerHTML = `<div class="painting">
+                  <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                  <h2>${art.title}</h2>
+                  <p>${art.medium}</p>
+                  <p>${art.artistDisplayName}</p>
+                  <p>${art.artistDisplayBio}</p>
+                  <p>${art.department}</p>
+                  </div>`;
+                document.querySelector('.gallery').appendChild(artwork)
+
+                }
+
+              } else {
+                  artwork.innerHTML = `<div class="painting">
+                  <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                  <h2>${art.title}</h2>
+                  <p>${art.medium}</p>
+                  <p>${art.artistDisplayName}</p>
+                  <p>${art.artistDisplayBio}</p>
+                  </div>`;
+                document.querySelector('.gallery').appendChild(artwork)
+
+                }
+
+              }
+
+              function AsianArt(){
+
+                if(checkboxAA.checked){
+
+                  if(`${art.department}` != "Asian Art"){
+
+                    artwork.innerHTML = ""
+
+                  }
+
+                  else {
+                    artwork.innerHTML = `<div class="painting">
+                    <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                    <h2>${art.title}</h2>
+                    <p>${art.medium}</p>
+                    <p>${art.artistDisplayName}</p>
+                    <p>${art.artistDisplayBio}</p>
+                    <p>${art.department}</p>
+                    </div>`;
+                  document.querySelector('.gallery').appendChild(artwork)
+
+                  }
+
+                } else {
+                    artwork.innerHTML = `<div class="painting">
+                    <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                    <h2>${art.title}</h2>
+                    <p>${art.medium}</p>
+                    <p>${art.artistDisplayName}</p>
+                    <p>${art.artistDisplayBio}</p>
+                    </div>`;
+                  document.querySelector('.gallery').appendChild(artwork)
+
+                  }
+
+                }
+       
 
         })
 
@@ -280,6 +400,7 @@
       document.getElementById("img01").src = element.src
       document.getElementById("modal01").style.display = "block"
     }
+    
 
     </script>
   </body>
