@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -13,6 +13,7 @@
     <style>
       body{
         font-family: 'DM Serif Display', serif;
+
       }
 
       .gallery{
@@ -20,11 +21,16 @@
         flex-wrap: wrap;
         padding: 0 4px;
         justify-content: space-around;
+
       }
 
       .painting{
         flex: 50%;
         padding: 0 4px;
+        border-style: outset;
+        border-radius: 5px;
+        margin: 5px 0 5px 0;
+
       }
 
       .painting h2{
@@ -46,6 +52,7 @@
 
       .painting:hover img{
         opacity: 0.7;
+        width: 350px;
       }
       
       h1{
@@ -56,6 +63,11 @@
         font-size: 60px;
         font-family: 'DM Serif Display', serif;
       }     
+
+      .checkbox-style{
+        position:relative;
+        margin-left: 10px;
+      }
      
     </style>
   </head>
@@ -63,8 +75,9 @@
 
     <h1>THE MET</h1>
 
-    <!-- <input type="checkbox" id="accept" class="cbox"> Highlight
-    <input type="button" id="btn" value="Submit"> -->
+    <div class="checkbox-style">
+      <input type="checkbox" id="checkbox" class="checkbox" name=checkbox> Highlight
+    </div>
 
     <div class="gallery"></div>
 
@@ -78,6 +91,7 @@
     <script>
 
     fetch("https://collectionapi.metmuseum.org/public/collection/v1/search?&q=sunflower")
+    //fetch(" https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir")
     .then((response) => {
         if(!response.ok){
           throw new Error(response.statusText)
@@ -99,12 +113,14 @@
           return res.json()
         })
         .then((art) =>{
-          //console.log(data)
-          console.log(art.primaryImage)
-          console.log(art.department)
+          console.log(art)
+          //console.log(art.primaryImage)
+          //console.log(art.department)
 
-          const artwork = document.createElement("div")
-          artwork.innerHTML = `<div class="painting">
+          //if(objID.length <=10){
+
+            const artwork = document.createElement("div")
+            artwork.innerHTML = `<div class="painting">
             <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
             <h2>${art.title}</h2>
             <p>${art.medium}</p>
@@ -112,7 +128,44 @@
             <p>${art.artistDisplayBio}</p>
             </div>`;
           document.querySelector('.gallery').appendChild(artwork)
+
+          //}
           
+
+          var checkbox = document.querySelector("input[name=checkbox]");
+          checkbox.addEventListener('click', highlight);
+
+          function highlight(){
+            const gallery = document.getElementById('gallery');
+            const painting = document.querySelectorAll('painting');
+
+            if(checkbox.checked){
+              console.log("checked");
+              //console.log(painting);
+              //console.log(artwork);
+
+              if(`${art.isHighlight}` == "false"){
+                console.log(art.objectID)
+                console.log(art.isHighlight)
+                console.log("check bool")
+                artwork.innerHTML = ""
+
+              }
+
+            } else{
+                artwork.innerHTML = `<div class="painting">
+                <img id="myImg" src="${art.primaryImage}" onclick="onClick(this)">
+                <h2>${art.title}</h2>
+                <p>${art.medium}</p>
+                <p>${art.artistDisplayName}</p>
+                <p>${art.artistDisplayBio}</p>
+                </div>`;
+              document.querySelector('.gallery').appendChild(artwork)
+          
+              }
+
+          }
+
         })
 
       })
